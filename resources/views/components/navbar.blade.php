@@ -107,20 +107,28 @@
         'translate-y-0': scrollingUp,
     }"
 >
-    <x-button
-        type="button"
-        icon-only
-        variant="secondary"
-        sr-text="Search"
-    >
-        <x-heroicon-o-search aria-hidden="true" class="w-6 h-6" />
-    </x-button>
+{{--    <x-button--}}
+{{--        type="button"--}}
+{{--        icon-only--}}
+{{--        variant="secondary"--}}
+{{--        sr-text="Search"--}}
+{{--    >--}}
+{{--        <x-heroicon-o-search aria-hidden="true" class="w-6 h-6" />--}}
+{{--    </x-button>--}}
 
-    <a href="{{ route('dashboard') }}">
-        <x-application-logo aria-hidden="true" class="w-10 h-10" />
+    <div class="flex items-center gap-2">
+        <a
+            href="{{ route('dashboard') }}"
+            class="inline-flex w-10 items-center"
+        >
+            <x-application-logo aria-hidden="true" />
 
-        <span class="sr-only">Dashboard</span>
-    </a>
+            <span class="sr-only">Dashboard</span>
+        </a>
+        <h5 class="font-bold">
+            Municipal Agriculture Office
+        </h5>
+    </div>
 
     <x-button
         type="button"

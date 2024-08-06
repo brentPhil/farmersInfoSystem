@@ -1,5 +1,7 @@
 import './bootstrap'
 
+import jQuery from 'jquery';
+window.$ = jQuery;
 import Alpine from 'alpinejs'
 import collapse from '@alpinejs/collapse'
 import PerfectScrollbar from 'perfect-scrollbar'
