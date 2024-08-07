@@ -3,8 +3,8 @@
     'withicon' => false,
     'required' => false,
     'default_val' => '',
-    'options' => [],
-    'selected' => '',
+    'options' => [], // This should now be an array of objects with 'id' and 'name'
+    'selected' => '', // This will store the selected 'id'
     'id' => '',
     'placeholder' => '',
     'name' => '',
@@ -28,8 +28,10 @@
     >
         @if ($default_val && !$label_out) <option value="" disabled selected>{{ $default_val }}</option> @endif
         @if ($placeholder && !$label_out) <option value="" disabled selected>{{ $placeholder }}</option> @endif
-        @foreach ($options as $value => $label)
-            <option value="{{ $value }}" {{ $selected == $value ? 'selected' : '' }}>{{ $label }}</option>
+        @foreach ($options as $option)
+            <option value="{{ $option['id'] }}" {{ $selected == $option['id'] ? 'selected' : '' }}>
+                {{ $option['name'] }}
+            </option>
         @endforeach
     </select>
 </div>

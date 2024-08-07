@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FarmerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
@@ -22,10 +23,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/farmers/table', function () {
-    return view('farmers.table');
-})->middleware(['auth', 'verified'])->name('farmers.table');
-
 Route::get('/archive/table', function () {
     return view('archive.table');
 })->middleware(['auth', 'verified'])->name('archive.table');
@@ -34,6 +31,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::prefix('farmers')->group(function () {
+    Route::get('/', [FarmerController::class, 'index'])->name('farmers.index');
+    Route::get('/create', [FarmerController::class, 'create'])->name('farmers.create');
+    Route::post('/store', [FarmerController::class, 'store'])->name('farmers.store');
+    Route::get('/show/{id}', [FarmerController::class, 'show'])->name('farmers.show');
+    Route::get('/edit/{id}', [FarmerController::class, 'edit'])->name('farmers.edit');
+    Route::put('/update/{id}', [FarmerController::class, 'update'])->name('farmers.update');
+    Route::post('/archive/{id}', [FarmerController::class, 'archive'])->name('farmers.archive');
+    Route::patch('/restore/{id}', [FarmerController::class, 'restore'])->name('farmers.restore');
+    Route::patch('/restore-all', [FarmerController::class, 'restoreAll'])->name('farmers.restoreAll');
+    Route::delete('/destroy/{id}', [FarmerController::class, 'destroy'])->name('farmers.destroy');
+    Route::delete('/delete-all', [FarmerController::class, 'deleteAll'])->name('farmers.deleteAll');
 });
 
 // useless routes

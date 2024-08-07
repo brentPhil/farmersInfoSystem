@@ -11,17 +11,17 @@
 
     <x-modal
         name="add-farmer-details"
-        :show="$errors->userDeletion->isNotEmpty()"
         focusable
         maxWidth="6xl"
     >
         <form
             method="post"
-{{--            action="{{ route('farmers.store') }}"--}}
+            action="{{ route('farmers.store') }}"
             class="p-6"
             enctype="multipart/form-data"
         >
-            <div class="overflow-hidden">
+            @csrf
+            <div>
                 <header class="border-b border-gray-400 dark:border-b-gray-600 py-4">
                     <h2 class="text-lg font-bold">
                         {{ __('PERSONAL INFORMATION') }}
@@ -60,17 +60,24 @@
                     <div class="grid md:grid-cols-2 gap-4">
                         <x-form.input label_out type="text" name="surname" placeholder="Surname" required />
                         <x-form.input label_out type="text" name="first_name" placeholder="First" required />
-                        <x-form.input label_out type="text" name="middle_name" placeholder="Middle" required />
-                        <x-form.input label_out type="text" name="extension_name" placeholder="Extension" required />
+                        <x-form.input label_out type="text" name="middle_name" placeholder="Middle" />
+                        <x-form.input label_out type="text" name="extension_name" placeholder="Extension" />
                     </div>
                 </x-form.form-separator>
 
+                <?php
+                $gender = [
+                    ['id' => 1, 'name' => 'Male'],
+                    ['id' => 2, 'name' => 'Female'],
+                ];
+                ?>
+
                 <x-form.form-separator label="Gender">
-                    <x-form.select label_out type="text" name="reference" :options="['male' => 'Male','female' => 'Female',]" placeholder="Select gender" required />
+                    <x-form.select label_out type="text" name="sex" :options="$gender" placeholder="Select gender" required />
                 </x-form.form-separator>
 
                 <x-form.form-separator label="Contact">
-                    <x-form.input label_out type="text" name="reference" placeholder="Phone" required />
+                    <x-form.input label_out type="text" name="contact_number" placeholder="Phone" required />
                 </x-form.form-separator>
 
                 <x-form.form-separator label="Birth">
@@ -84,32 +91,17 @@
                     ['value' => 'married', 'label' => 'Married'],
                     ['value' => 'widowed', 'label' => 'Widowed'],
                     ['value' => 'separated', 'label' => 'Separated']
-                ]
-                ?>
-
-
-                <x-form.form-separator label="Civil Status">
-                    <x-buttons.radio-group
-                        name="status"
-                        :options="$Status"
-                        selected="Single"
-                        :required="true"
-                    />
-                </x-form.form-separator>
-
-                <?php
-                $barangays = [
-                    'Ada', 'Amanlura', 'Arado', 'Atipolo',
-                    'Balud', 'Bangon', 'Bantagan', 'Baras',
-                    'Binolo', 'Binongto-an', 'Bislig',
-                    'Buntay', 'Cabalagnan', 'Cabarasan Guti', 'Cabonga-an'
                 ];
                 ?>
 
+                <x-form.form-separator label="Civil Status">
+                    <x-form.civil-status />
+                </x-form.form-separator>
+
                 <x-form.form-separator label="Address">
-                    <x-form.input label_out type="text" name="municipality" placeholder="House/Lot/Bldg. No" required />
+                    <x-form.input label_out type="text" name="building_no" placeholder="House/Lot/Bldg. No" required />
                     <x-form.input label_out type="text" name="street" placeholder="Street/Sitio/Subdv" required />
-                    <x-form.select label_out type="text" name="barangay" placeholder="Select Barangay" :options="$barangays" required />
+                    <x-form.select label_out type="text" name="barangays_id" placeholder="Select Barangay" :options="$barangays" required />
                     <x-form.input label_out type="text" name="municipality" placeholder="Municipality" required />
                     <x-form.input label_out type="text" name="province" placeholder="Province" required />
                     <x-form.input label_out type="text" name="region" placeholder="Region" required />
@@ -129,6 +121,7 @@
                 <x-button
                     variant="primary"
                     class="ml-3"
+                    type="submit"
                 >
                     {{ __('Add Farmer') }}
                 </x-button>
@@ -136,3 +129,6 @@
         </form>
     </x-modal>
 </section>
+
+
+

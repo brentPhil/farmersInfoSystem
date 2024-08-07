@@ -91,14 +91,14 @@
                     </x-button>
                 </div>
 
-                @if (Route::has('register'))
-                    <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {{ __('Don’t have an account?') }}
-                        <a href="{{ route('register') }}" class="text-emerald-100 hover:underline">
-                            {{ __('Register') }}
-                        </a>
-                    </p>
-                @endif
+{{--                @if (Route::has('register'))--}}
+{{--                    <p class="text-sm text-gray-600 dark:text-gray-400">--}}
+{{--                        {{ __('Don’t have an account?') }}--}}
+{{--                        <a href="{{ route('register') }}" class="text-emerald-100 hover:underline">--}}
+{{--                            {{ __('Register') }}--}}
+{{--                        </a>--}}
+{{--                    </p>--}}
+{{--                @endif--}}
             </div>
         </form>
     </x-auth-card>
